@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useEffect, useMemo } from "react";
 import {
   forceSimulation,
   forceCollide,
@@ -14,7 +15,6 @@ import { Dimensions, View, PanResponder } from "react-native";
 export default class ForceDiagram extends React.Component {
   constructor(props) {
     super(props);
-    const graphData = props.graphData;
     const range = 20;
     const width = Dimensions.get("window").width;
     const height = Dimensions.get("window").height;
@@ -88,8 +88,11 @@ export default class ForceDiagram extends React.Component {
   }
 
   render() {
+    console.log("RENDER");
+    console.log(this.props.graphData);
     const { width, height } = this.props;
-    const { nodes, selectedNode } = this.state;
+    const { selectedNode } = this.state;
+    console.log(nodes);
 
     return (
       <View {...this.panResponder.panHandlers} style={{ flex: 1 }}>
@@ -98,7 +101,7 @@ export default class ForceDiagram extends React.Component {
             {nodes.map((node) => (
               <G>
                 <Circle
-                  key={node.key}
+                  key={node.id}
                   r={node.r}
                   cx={node.x}
                   cy={node.y}
@@ -113,7 +116,7 @@ export default class ForceDiagram extends React.Component {
                   selectable={false}
                   style={{ userSelect: "none", cursor: "default" }}
                 >
-                  {node.text}
+                  {node.id}
                 </Text>
               </G>
             ))}

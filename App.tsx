@@ -64,7 +64,12 @@ class App extends React.Component<Props, State> {
         </View>
         <TouchableWithoutFeedback onPress={this.handleDismissKeyboard}>
           <View style={styles.bottom}>
-            <ForceDiagram width={100} height={100} range={10} />
+            <ForceDiagram
+              width={100}
+              height={100}
+              range={10}
+              graphData={this.state.graphData}
+            />
           </View>
         </TouchableWithoutFeedback>
       </View>
